@@ -1,7 +1,9 @@
 # -*- coding: cp1251 -*-
 from random import choice
 import attr
-from users import correct_check, create_new_user
+from users import create_new_user, delete_user, give_back_book, take_book
+from books import create_new_book, delete_book, free_books_list
+from utilits import books, users
 
 def menu():
     text_menu = """\
@@ -10,7 +12,7 @@ def menu():
     3. Зарегистрировать нового пользователя
     4. Удалить пользователя из реестра
     5. Взять книгу
-    6. Вернуть книгу
+    6. Вернуть книгу    
     7. Найти пользователя книги
     8. Список доступных книг
     """
@@ -29,6 +31,18 @@ while(True):
             print("Введите корректное значение ")
 
     match choice:
+        case 1:
+            create_new_book()
+        case 2:
+            delete_book()
         case 3:
             create_new_user()
+        case 4:
+            delete_user()
+        case 5:
+            take_book()
+        case 6:
+            give_back_book()
+        case 8:
+            free_books_list()
 
