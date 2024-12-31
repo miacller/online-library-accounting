@@ -1,6 +1,7 @@
 # -*- coding: cp1251 -*-
 import attr 
 from utilits import Book, books, free_books, correct_check, book_operation_check
+from users import users, User
 
 def create_new_book():
     title = correct_check("Введите название книги: ")
@@ -19,9 +20,23 @@ def delete_book():
     del free_books[isbn]
     print(f"Книга {choosen_book_title} успешно удалена из учета")
 
+
 def free_books_list():
-    for book in free_books:
-        print(f"{book.title} ID {book.isbn}")
+    for isbn in free_books:
+        print(books[isbn].title, '- ISBN:', books[isbn].isbn)
+
+def books_user_check():
+    isbn = int(correct_check("Введите ISBN книги"))
+    if (isbn in books) and (not(books[isbn].presence)):
+        for user_id in users:
+            if isbn in users[user_id].borrowed_books:
+                print('Книга на руках у пользователя с ID:', user_id)
+                break
+    elif(not(isbn in books)):
+        print("Книги с таким ISBN нет в учете")
+    else:
+        print("Указанная книга свободна")
+        
 
 
 
